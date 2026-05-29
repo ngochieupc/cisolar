@@ -1,0 +1,6 @@
+{
+  "name": "Professional Engineering Calculator",
+  "description": "Industrial electrical engineering and solar PV rooftop EPC calculator with detailed reporting.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

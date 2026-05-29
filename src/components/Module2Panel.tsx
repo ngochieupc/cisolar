@@ -3,6 +3,7 @@ import { BatteryCharging, RotateCcw, AlertTriangle, CheckCircle2 } from "lucide-
 import { Module2State } from "../types";
 import { calculateModule2 } from "../utils/calculator";
 import { Bar } from "react-chartjs-2";
+import { CleanFormattedNumberInput } from "./CleanFormattedNumberInput";
 
 interface Module2PanelProps {
   state: Module2State;
@@ -23,6 +24,14 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
       ctRatioSecondary: 5
     });
   };
+
+  const isDark = typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : false;
+  const textColor = isDark ? "#e2e8f0" : "#1e293b";
+  const labelColor = isDark ? "#7aa3c8" : "#475569";
+  const gridLineColor = isDark ? "#23354e" : "#e2e8f0";
+  const tooltipBgColor = isDark ? "#0f172a" : "#ffffff";
+  const tooltipBorderColor = isDark ? "#23354e" : "#cbd5e1";
+  const tooltipTitleColor = isDark ? "#f8fafc" : "#0f172a";
 
   // Bar Chart Configuration for Pre vs Post PF
   const barChartData = {
@@ -49,10 +58,10 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
     plugins: {
       legend: { display: false },
       tooltip: {
-        backgroundColor: "#111c2a",
-        borderColor: "#1e3248",
+        backgroundColor: tooltipBgColor,
+        borderColor: tooltipBorderColor,
         borderWidth: 1,
-        titleColor: "#e8f4ff",
+        titleColor: tooltipTitleColor,
         bodyFont: { family: "JetBrains Mono" }
       }
     },
@@ -60,13 +69,13 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
       y: {
         min: 0.4,
         max: 1.05,
-        grid: { color: "#1e324820" },
-        ticks: { color: "#7aa3c8", font: { family: "JetBrains Mono", size: 10 } },
-        title: { display: true, text: "Hệ Số Công Suất (0 - 1)", color: "#7aa3c8", font: { size: 11 } }
+        grid: { color: gridLineColor },
+        ticks: { color: labelColor, font: { family: "JetBrains Mono", size: 10 } },
+        title: { display: true, text: "Hệ Số Công Suất (0 - 1)", color: labelColor, font: { size: 11 } }
       },
       x: {
         grid: { display: false },
-        ticks: { color: "#7aa3c8", font: { size: 11, weight: "bold" as const } }
+        ticks: { color: labelColor, font: { size: 11, weight: "bold" as const } }
       }
     }
   };
@@ -99,13 +108,11 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
                 <span>Công suất tải tác dụng thực (P)</span>
                 <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">kW</span>
               </label>
-              <input
-                type="number"
+              <CleanFormattedNumberInput
                 className="inp"
                 value={state.loadKw}
-                min="1"
-                step="5"
-                onChange={(e) => onChange({ loadKw: parseFloat(e.target.value) || 0 })}
+                min={1}
+                onChange={(val) => onChange({ loadKw: val })}
               />
             </div>
 
@@ -115,14 +122,13 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
                   <span>Cosφ₁ Hiện Trạng</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">Hệ Số</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.currentPf}
-                  min="0.1"
-                  max="0.99"
-                  step="0.01"
-                  onChange={(e) => onChange({ currentPf: parseFloat(e.target.value) || 0 })}
+                  min={0.1}
+                  max={0.99}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ currentPf: val })}
                 />
               </div>
 
@@ -131,14 +137,13 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
                   <span>Cosφ₂ Mục Tiêu</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">EVN≥0.90</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.targetPf}
-                  min="0.4"
-                  max="1.0"
-                  step="0.01"
-                  onChange={(e) => onChange({ targetPf: parseFloat(e.target.value) || 0 })}
+                  min={0.4}
+                  max={1.0}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ targetPf: val })}
                 />
               </div>
             </div>
@@ -165,13 +170,11 @@ export const Module2Panel: React.FC<Module2PanelProps> = ({ state, onChange }) =
                   <span>Công suất/1 Block Tụ</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">kVAr</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.selectedStepSize}
-                  min="5"
-                  step="5"
-                  onChange={(e) => onChange({ selectedStepSize: parseFloat(e.target.value) || 25 })}
+                  min={5}
+                  onChange={(val) => onChange({ selectedStepSize: val })}
                 />
               </div>
             </div>

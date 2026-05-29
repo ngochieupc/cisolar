@@ -3,6 +3,7 @@ import { Sun, RotateCcw, AlertTriangle, CheckCircle2, TrendingUp, HelpCircle } f
 import { Module3State, SOLAR_PANELS } from "../types";
 import { calculateModule3 } from "../utils/calculator";
 import { Line } from "react-chartjs-2";
+import { CleanFormattedNumberInput } from "./CleanFormattedNumberInput";
 
 interface Module3PanelProps {
   state: Module3State;
@@ -79,17 +80,21 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
     ]
   };
 
+  const isDark = typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : false;
+  const labelColor = isDark ? "#7aa3c8" : "#475569";
+  const gridLineColor = isDark ? "#23354e" : "#e2e8f0";
+
   const lineChartOptions1 = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        labels: { color: "#7aa3c8", font: { size: 10 } }
+        labels: { color: labelColor, font: { size: 10 } }
       }
     },
     scales: {
-      y: { grid: { color: "#1e324820" }, ticks: { color: "#7aa3c8", font: { size: 9 } } },
-      x: { grid: { display: false }, ticks: { color: "#7aa3c8", font: { size: 9 } } }
+      y: { grid: { color: gridLineColor }, ticks: { color: labelColor, font: { size: 9 } } },
+      x: { grid: { display: false }, ticks: { color: labelColor, font: { size: 9 } } }
     }
   };
 
@@ -127,12 +132,12 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
     maintainAspectRatio: false,
     plugins: {
       legend: {
-        labels: { color: "#7aa3c8", font: { size: 10 } }
+        labels: { color: labelColor, font: { size: 10 } }
       }
     },
     scales: {
-      y: { grid: { color: "#1e324820" }, ticks: { color: "#7aa3c8", font: { size: 9 } } },
-      x: { grid: { display: false }, ticks: { color: "#7aa3c8", font: { size: 8 } } }
+      y: { grid: { color: gridLineColor }, ticks: { color: labelColor, font: { size: 9 } } },
+      x: { grid: { display: false }, ticks: { color: labelColor, font: { size: 8 } } }
     }
   };
 
@@ -165,12 +170,11 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
                   <span>Tải ban ngày (Avg)</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5" style={{ borderRadius: "2px" }}>kW</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.daytimeAvgLoadKw}
-                  min="1"
-                  onChange={(e) => onChange({ daytimeAvgLoadKw: parseFloat(e.target.value) || 0 })}
+                  min={1}
+                  onChange={(val) => onChange({ daytimeAvgLoadKw: val })}
                 />
               </div>
 
@@ -179,12 +183,11 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
                   <span>Tải bám tối thiểu</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5" style={{ borderRadius: "2px" }}>kW</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.daytimeMinLoadKw}
-                  min="1"
-                  onChange={(e) => onChange({ daytimeMinLoadKw: parseFloat(e.target.value) || 0 })}
+                  min={1}
+                  onChange={(val) => onChange({ daytimeMinLoadKw: val })}
                 />
               </div>
             </div>
@@ -195,12 +198,11 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
                   <span>Diện tích mái có sẵn</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5" style={{ borderRadius: "2px" }}>m²</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.roofAreaSqM}
-                  min="10"
-                  onChange={(e) => onChange({ roofAreaSqM: parseFloat(e.target.value) || 0 })}
+                  min={10}
+                  onChange={(val) => onChange({ roofAreaSqM: val })}
                 />
               </div>
 
@@ -225,12 +227,11 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
                   <span>Giá mua điện EVN</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5" style={{ borderRadius: "2px" }}>đ/kWh</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.electricityRateVnd}
-                  min="500"
-                  onChange={(e) => onChange({ electricityRateVnd: parseFloat(e.target.value) || 0 })}
+                  min={500}
+                  onChange={(val) => onChange({ electricityRateVnd: val })}
                 />
               </div>
 
@@ -239,13 +240,11 @@ export const Module3Panel: React.FC<Module3PanelProps> = ({ state, onChange, mod
                   <span>Suất EPC trọn gói</span>
                   <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5" style={{ borderRadius: "2px" }}>đ/Wp</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.installationCostPerKwpVnd}
-                  min="1000000"
-                  step="100000"
-                  onChange={(e) => onChange({ installationCostPerKwpVnd: parseFloat(e.target.value) || 0 })}
+                  min={1000000}
+                  onChange={(val) => onChange({ installationCostPerKwpVnd: val })}
                 />
               </div>
             </div>

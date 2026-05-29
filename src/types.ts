@@ -269,7 +269,7 @@ export interface FullAppState {
   module2: Module2State;
   module3: Module3State;
   module4: Module4State;
-  theme: "dark" | "light";
+  theme: "dark" | "light" | "auto";
 }
 
 export const INITIAL_STATE: FullAppState = {
@@ -315,5 +315,5 @@ export const INITIAL_STATE: FullAppState = {
     cosphi: 0.85,
     voltage: 400
   },
-  theme: "dark"
+  theme: "auto"
 };

@@ -1,28 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 @import "tailwindcss";
 
+:root {
+  --bg-main: #f1f5f9;
+  --bg-panel: #ffffff;
+  --bg-card: #ffffff;
+  --bg-card-sub: #f8fafc;
+  --border-color: #cbd5e1;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --bg-input: #ffffff;
+  --border-input: #94a3b8;
+  --bg-sidebar-active: #e2e8f0;
+  --text-sidebar-active: #0369a1;
+  --bg-sidebar: #f8fafc;
+  --bg-header: rgba(255, 255, 255, 0.95);
+  --border-header: #cbd5e1;
+}
+
+/* Dark mode overrides mapping */
+html.dark, [data-theme="dark"] {
+  --bg-main: #0b111e;
+  --bg-panel: #0e1726;
+  --bg-card: #152238;
+  --bg-card-sub: #0f1b2d;
+  --border-color: #23354e;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --bg-input: #111a2e;
+  --border-input: #2d3e5e;
+  --bg-sidebar-active: #1a2f4c;
+  --text-sidebar-active: #38bdf8;
+  --bg-sidebar: #0e1726;
+  --bg-header: rgba(14, 23, 38, 0.95);
+  --border-header: #23354e;
+}
+
 @theme {
   --font-sans: "Times New Roman", Times, "Baskerville", Georgia, serif;
   --font-display: "Times New Roman", Times, "Baskerville", Georgia, serif;
   --font-mono: "Times New Roman", Times, "Baskerville", Georgia, serif;
   
-  --color-industrial-dark: #f1f5f9;
-  --color-industrial-panel: #ffffff;
-  --color-industrial-card: #ffffff;
-  --color-industrial-card2: #f8fafc;
-  --color-industrial-border: #cbd5e1;
+  --color-industrial-dark: var(--bg-main);
+  --color-industrial-panel: var(--bg-panel);
+  --color-industrial-card: var(--bg-card);
+  --color-industrial-card2: var(--bg-card-sub);
+  --color-industrial-border: var(--border-color);
 }
 
 html {
   font-size: 17px;
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 body {
   font-family: "Times New Roman", Times, Georgia, serif;
   font-size: 17px;
   line-height: 1.6;
+  background-color: var(--bg-main);
+  color: var(--text-primary);
 }
 
 /* Custom Grid Texture Overlay */
@@ -39,15 +77,15 @@ body {
 
 /* Glassmorphism utilities */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.95);
+  background: var(--bg-header);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(203, 213, 225, 0.7);
+  border: 1px solid var(--border-color);
 }
 
 .kpi-card {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 18px;
   position: relative;
@@ -67,7 +105,7 @@ body {
 
 .kpi-card:hover {
   border-color: #0284c7;
-  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.1);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.15);
 }
 
 .kpi-card.cyan::before {
@@ -100,7 +138,7 @@ body {
 
 .kpi-label {
   font-size: 13px;
-  color: #475569;
+  color: var(--text-secondary);
   letter-spacing: 1px;
   text-transform: uppercase;
   font-family: inherit;
@@ -109,17 +147,17 @@ body {
 
 .kpi-sub {
   font-size: 13px;
-  color: #475569;
+  color: var(--text-secondary);
   font-family: inherit;
 }
 
 /* Custom inputs styling */
 .inp {
   width: 100%;
-  background: #ffffff;
-  border: 1px solid #94a3b8;
+  background: var(--bg-input);
+  border: 1px solid var(--border-input);
   border-radius: 6px;
-  color: #0f172a;
+  color: var(--text-primary);
   font-family: inherit;
   font-size: 15px;
   font-weight: bold;
@@ -148,34 +186,34 @@ select.inp {
   width: 100%;
   border-collapse: collapse;
   font-size: 15px;
-  background: #ffffff;
+  background: var(--bg-card);
   border-radius: 8px;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
 }
 
 .data-table th {
   font-family: inherit;
   font-size: 14px;
   letter-spacing: 0.5px;
-  color: #1e293b;
+  color: var(--text-primary);
   text-transform: uppercase;
   padding: 12px 16px;
   text-align: left;
-  border-bottom: 2px solid #cbd5e1;
-  background: #f1f5f9;
+  border-bottom: 2px solid var(--border-color);
+  background: var(--bg-card-sub);
   font-weight: 700;
 }
 
 .data-table td {
   padding: 12px 16px;
-  border-bottom: 1px solid #e2e8f0;
+  border-bottom: 1px solid var(--border-color);
   font-family: inherit;
-  color: #334155;
+  color: var(--text-primary);
   transition: background 0.15s;
 }
 
 .data-table tr:hover td {
-  background: rgba(2, 132, 199, 0.04);
+  background: rgba(2, 132, 199, 0.08);
 }
 
 .val-highlight {
@@ -194,12 +232,12 @@ select.inp {
 
 /* Progress bars */
 .progress-bar-wrap {
-  background: #e2e8f0;
+  background: var(--bg-card-sub);
   border-radius: 4px;
   height: 10px;
   overflow: hidden;
   margin: 8px 0;
-  border: 1px solid #cbd5e1;
+  border: 1px solid var(--border-color);
 }
 
 .progress-bar-fill {
@@ -243,8 +281,8 @@ select.inp {
 
 .btn-outline {
   background: transparent;
-  border: 1px solid #cbd5e1;
-  color: #334155;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
 }
 
 .btn-outline:hover {
@@ -259,22 +297,22 @@ select.inp {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border-color);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--text-secondary);
 }
 
 /* Responsive grid layouts */
 .chart-wrap {
-  background: #ffffff;
-  border: 1px solid #cbd5e1;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 18px;
   position: relative;
@@ -285,28 +323,114 @@ select.inp {
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.5px;
-  color: #1e293b;
+  color: var(--text-primary);
   text-transform: uppercase;
   margin-bottom: 14px;
 }
 
 .divider {
   height: 1.5px;
-  background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
   margin: 22px 0;
+}
+
+/* Custom class .card to map to theme variables */
+.card {
+  background: var(--bg-panel);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 18px;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+/* Ensure section titles and general hardcoded slate elements use theme variables */
+.section-title {
+  color: var(--text-primary) !important;
+}
+
+.section-subtitle {
+  color: var(--text-secondary) !important;
+}
+
+/* Force dark/light responsiveness for Tailwind text utility classes that reduce contrast */
+html:not(.dark) .text-slate-100, [data-theme="light"] .text-slate-100 {
+  color: var(--text-primary) !important;
+}
+
+html:not(.dark) .text-slate-200, [data-theme="light"] .text-slate-200 {
+  color: var(--text-secondary) !important;
+}
+
+html:not(.dark) .text-slate-300, [data-theme="light"] .text-slate-300 {
+  color: var(--text-primary) !important;
+}
+
+html:not(.dark) .text-slate-400, [data-theme="light"] .text-slate-400 {
+  color: var(--text-secondary) !important;
+}
+
+/* Hardcoded list or layout styling inside table bodies / panel headers under Dark theme */
+html.dark .text-slate-100, [data-theme="dark"] .text-slate-100 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-200, [data-theme="dark"] .text-slate-200 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-300, [data-theme="dark"] .text-slate-300 {
+  color: #e2e8f0 !important;
+}
+
+html.dark .text-slate-400, [data-theme="dark"] .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+/* Fix alerts and inputs for high-contrast dark theme readability */
+html.dark .bg-emerald-50, [data-theme="dark"] .bg-emerald-50 {
+  background-color: rgba(16, 185, 129, 0.15) !important;
+  color: #34d399 !important;
+}
+html.dark .border-emerald-200, [data-theme="dark"] .border-emerald-200 {
+  border-color: rgba(16, 185, 129, 0.3) !important;
+}
+
+html.dark .bg-amber-50, [data-theme="dark"] .bg-amber-50 {
+  background-color: rgba(245, 158, 11, 0.15) !important;
+  color: #fbbf24 !important;
+}
+html.dark .border-amber-200, [data-theme="dark"] .border-amber-200 {
+  border-color: rgba(245, 158, 11, 0.3) !important;
+}
+
+html.dark .bg-rose-50, [data-theme="dark"] .bg-rose-50 {
+  background-color: rgba(239, 68, 68, 0.15) !important;
+  color: #fca5a5 !important;
+}
+html.dark .border-rose-200, [data-theme="dark"] .border-rose-200 {
+  border-color: rgba(239, 68, 68, 0.3) !important;
+}
+
+html.dark .bg-sky-50, [data-theme="dark"] .bg-sky-50 {
+  background-color: rgba(14, 165, 233, 0.15) !important;
+  color: #38bdf8 !important;
+}
+html.dark .border-sky-200, [data-theme="dark"] .border-sky-200 {
+  border-color: rgba(14, 165, 233, 0.3) !important;
 }
 
 /* Helper styles for input inputs layout text size increment */
 label.input-label {
   font-size: 14px !important;
   font-weight: 700 !important;
-  color: #1e293b !important;
+  color: var(--text-primary) !important;
 }
 
 .card-title {
   font-size: 14px !important;
   font-weight: 700 !important;
-  color: #1e293b !important;
+  color: var(--text-primary) !important;
 }
 
 /* Print Overrides */

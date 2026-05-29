@@ -114,6 +114,15 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
     });
   }
 
+  const isDark = typeof document !== "undefined" ? document.documentElement.classList.contains("dark") : false;
+  const textColor = isDark ? "#e2e8f0" : "#1e293b";
+  const mutedTextColor = isDark ? "#94a3b8" : "#475569";
+  const gridLineColor = isDark ? "#23354e" : "#e2e8f0";
+  const tooltipBgColor = isDark ? "#0f172a" : "#ffffff";
+  const tooltipBorderColor = isDark ? "#23354e" : "#cbd5e1";
+  const tooltipTitleColor = isDark ? "#f8fafc" : "#0f172a";
+  const tooltipBodyColor = isDark ? "#94a3b8" : "#334155";
+
   // Doughnut Chart data for P vs Q
   const doughnutData = {
     labels: ["Tải tác dụng P (kW)", "Tải phản kháng Q (kVAr)"],
@@ -121,7 +130,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       {
         data: [m1.activePowerKw || 1, m1.reactivePowerKvar || 0.1],
         backgroundColor: ["#0284c7", "#ca8a04"],
-        borderColor: ["#ffffff", "#ffffff"],
+        borderColor: isDark ? "#111c2a" : "#ffffff",
         borderWidth: 2,
         hoverOffset: 6,
       }
@@ -136,17 +145,17 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       legend: {
         position: "bottom" as const,
         labels: {
-          color: "#1e293b",
+          color: textColor,
           font: { family: "Times New Roman", size: 14, weight: "bold" },
           padding: 12
         }
       },
       tooltip: {
-        backgroundColor: "#ffffff",
-        borderColor: "#cbd5e1",
+        backgroundColor: tooltipBgColor,
+        borderColor: tooltipBorderColor,
         borderWidth: 1,
-        titleColor: "#0f172a",
-        bodyColor: "#334155",
+        titleColor: tooltipTitleColor,
+        bodyColor: tooltipBodyColor,
         bodyFont: { family: "Times New Roman", size: 13 }
       }
     }
@@ -220,28 +229,29 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
     plugins: {
       legend: {
         labels: {
-          color: "#1e293b",
+          color: textColor,
           font: { size: 13, family: "Times New Roman", weight: "bold" }
         }
       },
       tooltip: {
-        backgroundColor: "#ffffff",
-        borderColor: "#cbd5e1",
+        backgroundColor: tooltipBgColor,
+        borderColor: tooltipBorderColor,
         borderWidth: 1,
-        titleColor: "#0f172a",
+        titleColor: tooltipTitleColor,
+        bodyColor: tooltipBodyColor,
         bodyFont: { family: "Times New Roman", size: 13 },
         padding: 10
       }
     },
     scales: {
       y: {
-        grid: { color: "#e2e8f0" },
-        ticks: { color: "#334155", font: { family: "Times New Roman", size: 13, weight: "bold" } },
-        title: { display: true, text: "Công Suất (kW)", color: "#1e293b", font: { size: 13, family: "Times New Roman", weight: "bold" } }
+        grid: { color: gridLineColor },
+        ticks: { color: mutedTextColor, font: { family: "Times New Roman", size: 13, weight: "bold" } },
+        title: { display: true, text: "Công Suất (kW)", color: textColor, font: { size: 13, family: "Times New Roman", weight: "bold" } }
       },
       x: {
         grid: { display: false },
-        ticks: { color: "#334155", font: { family: "Times New Roman", size: 13, weight: "bold" } }
+        ticks: { color: mutedTextColor, font: { family: "Times New Roman", size: 13, weight: "bold" } }
       }
     }
   };

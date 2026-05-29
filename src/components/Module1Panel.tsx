@@ -3,6 +3,7 @@ import { Zap, RotateCcw, AlertTriangle, CheckCircle2, HelpCircle } from "lucide-
 import { Module1State } from "../types";
 import { calculateModule1, getAmpereToKwTable } from "../utils/calculator";
 import { MetricGauge } from "./MetricGauge";
+import { CleanFormattedNumberInput } from "./CleanFormattedNumberInput";
 
 interface Module1PanelProps {
   state: Module1State;
@@ -92,13 +93,12 @@ export const Module1Panel: React.FC<Module1PanelProps> = ({ state, onChange }) =
                 <label className="input-label flex justify-between text-xs font-mono text-slate-400 mb-1.5">
                   <span>Pha R (IR)</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.currentR}
-                  min="0"
-                  step="0.1"
-                  onChange={(e) => onChange({ currentR: parseFloat(e.target.value) || 0 })}
+                  min={0}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ currentR: val })}
                 />
               </div>
 
@@ -106,13 +106,12 @@ export const Module1Panel: React.FC<Module1PanelProps> = ({ state, onChange }) =
                 <label className="input-label flex justify-between text-xs font-mono text-slate-400 mb-1.5">
                   <span>Pha S (IS)</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.currentS}
-                  min="0"
-                  step="0.1"
-                  onChange={(e) => onChange({ currentS: parseFloat(e.target.value) || 0 })}
+                  min={0}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ currentS: val })}
                 />
               </div>
 
@@ -120,13 +119,12 @@ export const Module1Panel: React.FC<Module1PanelProps> = ({ state, onChange }) =
                 <label className="input-label flex justify-between text-xs font-mono text-slate-400 mb-1.5">
                   <span>Pha T (IT)</span>
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.currentT}
-                  min="0"
-                  step="0.1"
-                  onChange={(e) => onChange({ currentT: parseFloat(e.target.value) || 0 })}
+                  min={0}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ currentT: val })}
                 />
               </div>
             </div>
@@ -139,14 +137,13 @@ export const Module1Panel: React.FC<Module1PanelProps> = ({ state, onChange }) =
                 </span>
                 <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">0.1 - 1.0</span>
               </label>
-              <input
-                type="number"
+              <CleanFormattedNumberInput
                 className="inp"
                 value={state.cosphi}
-                min="0.1"
-                max="1.0"
-                step="0.01"
-                onChange={(e) => onChange({ cosphi: parseFloat(e.target.value) || 0.85 })}
+                min={0.1}
+                max={1.0}
+                allowDecimals={true}
+                onChange={(val) => onChange({ cosphi: val })}
               />
             </div>
 
@@ -156,13 +153,11 @@ export const Module1Panel: React.FC<Module1PanelProps> = ({ state, onChange }) =
                 <span>Công suất máy biến áp trạm (S_mba)</span>
                 <span className="input-unit text-[10px] bg-slate-900 border border-slate-800 px-1.5 rounded">kVA</span>
               </label>
-              <input
-                type="number"
+              <CleanFormattedNumberInput
                 className="inp"
                 value={state.transformerKva}
-                min="0"
-                step="10"
-                onChange={(e) => onChange({ transformerKva: parseFloat(e.target.value) || 0 })}
+                min={0}
+                onChange={(val) => onChange({ transformerKva: val })}
               />
             </div>
           </div>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Layers, RotateCcw, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Module4State, CABLE_TABLE } from "../types";
 import { calculateCable } from "../utils/calculator";
+import { CleanFormattedNumberInput } from "./CleanFormattedNumberInput";
 
 interface Module4PanelProps {
   state: Module4State;
@@ -76,12 +77,11 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
             <div className="grid grid-cols-3 gap-2">
               <div className="input-group col-span-1">
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">Tải Thiết Kế (P)</label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.loadKw}
-                  min="0"
-                  onChange={(e) => onChange({ loadKw: parseFloat(e.target.value) || 0 })}
+                  min={0}
+                  onChange={(val) => onChange({ loadKw: val })}
                 />
               </div>
 
@@ -101,14 +101,13 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
 
               <div className="input-group col-span-1">
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">Cosφ Tuyến</label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.cosphi}
-                  min="0.1"
-                  max="1.0"
-                  step="0.01"
-                  onChange={(e) => onChange({ cosphi: parseFloat(e.target.value) || 0.85 })}
+                  min={0.1}
+                  max={1.0}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ cosphi: val })}
                 />
               </div>
             </div>
@@ -118,12 +117,12 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">
                   Dòng Hiện Thực I
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp text-xs"
-                  value={state.currentA || ""}
+                  value={state.currentA}
                   placeholder={`${computedI.toFixed(0)} A (Auto)`}
-                  onChange={(e) => onChange({ currentA: parseFloat(e.target.value) || 0 })}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ currentA: val })}
                 />
               </div>
 
@@ -131,12 +130,11 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">
                   Chiều Dài L (m)
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.cableLength}
-                  min="1"
-                  onChange={(e) => onChange({ cableLength: parseFloat(e.target.value) || 0 })}
+                  min={1}
+                  onChange={(val) => onChange({ cableLength: val })}
                 />
               </div>
 
@@ -144,13 +142,12 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">
                   Nhiệt độ phòng (°C)
                 </label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.ambientTemp}
-                  min="10"
-                  max="60"
-                  onChange={(e) => onChange({ ambientTemp: parseFloat(e.target.value) || 30 })}
+                  min={10}
+                  max={60}
+                  onChange={(val) => onChange({ ambientTemp: val })}
                 />
               </div>
             </div>
@@ -183,14 +180,13 @@ export const Module4Panel: React.FC<Module4PanelProps> = ({ state, onChange }) =
 
               <div className="input-group">
                 <label className="input-label text-[11px] font-mono text-slate-400 mb-1 block">Sụt Áp Hạn Định %</label>
-                <input
-                  type="number"
+                <CleanFormattedNumberInput
                   className="inp"
                   value={state.allowableDropPercent}
-                  min="1"
-                  max="10"
-                  step="0.5"
-                  onChange={(e) => onChange({ allowableDropPercent: parseFloat(e.target.value) || 3.0 })}
+                  min={1}
+                  max={10}
+                  allowDecimals={true}
+                  onChange={(val) => onChange({ allowableDropPercent: val })}
                 />
               </div>
             </div>

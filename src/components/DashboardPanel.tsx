@@ -120,8 +120,8 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
     datasets: [
       {
         data: [m1.activePowerKw || 1, m1.reactivePowerKvar || 0.1],
-        backgroundColor: ["#00d4ff", "#ffb020"],
-        borderColor: ["#0d1520", "#0d1520"],
+        backgroundColor: ["#0284c7", "#ca8a04"],
+        borderColor: ["#ffffff", "#ffffff"],
         borderWidth: 2,
         hoverOffset: 6,
       }
@@ -136,18 +136,18 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       legend: {
         position: "bottom" as const,
         labels: {
-          color: "#7aa3c8",
-          font: { family: "JetBrains Mono", size: 11 },
+          color: "#1e293b",
+          font: { family: "Times New Roman", size: 14, weight: "bold" },
           padding: 12
         }
       },
       tooltip: {
-        backgroundColor: "#111c2a",
-        borderColor: "#1e3248",
+        backgroundColor: "#ffffff",
+        borderColor: "#cbd5e1",
         borderWidth: 1,
-        titleColor: "#e8f4ff",
-        bodyColor: "#7aa3c8",
-        bodyFont: { family: "JetBrains Mono" }
+        titleColor: "#0f172a",
+        bodyColor: "#334155",
+        bodyFont: { family: "Times New Roman", size: 13 }
       }
     }
   };
@@ -176,8 +176,8 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       {
         label: "Danh định Tải Công nghiệp (kW)",
         data: loadCurve,
-        borderColor: "#ffb020",
-        backgroundColor: "rgba(255, 176, 32, 0.04)",
+        borderColor: "#ea580c",
+        backgroundColor: "rgba(234, 88, 12, 0.05)",
         borderWidth: 2.5,
         tension: 0.4,
         fill: true,
@@ -188,8 +188,8 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       {
         label: "Sản lượng phát Solar PV (kWp)",
         data: solarGenCurve,
-        borderColor: "#00d4ff",
-        backgroundColor: "rgba(0, 212, 255, 0.06)",
+        borderColor: "#0284c7",
+        backgroundColor: "rgba(2, 130, 199, 0.05)",
         borderWidth: 2.5,
         tension: 0.4,
         fill: true,
@@ -200,9 +200,9 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       {
         label: "Hấp thụ Solar tự dùng (kW)",
         data: actualSolarCurve,
-        borderColor: "#00ff88",
+        borderColor: "#16a34a",
         borderWidth: 0,
-        backgroundColor: "rgba(0, 255, 136, 0.12)",
+        backgroundColor: "rgba(22, 163, 74, 0.12)",
         tension: 0.4,
         fill: true,
         pointRadius: 0,
@@ -220,28 +220,28 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
     plugins: {
       legend: {
         labels: {
-          color: "#7aa3c8",
-          font: { size: 10, family: "Inter" }
+          color: "#1e293b",
+          font: { size: 13, family: "Times New Roman", weight: "bold" }
         }
       },
       tooltip: {
-        backgroundColor: "#111c2a",
-        borderColor: "#1e3248",
+        backgroundColor: "#ffffff",
+        borderColor: "#cbd5e1",
         borderWidth: 1,
-        titleColor: "#e8f4ff",
-        bodyFont: { family: "JetBrains Mono" },
+        titleColor: "#0f172a",
+        bodyFont: { family: "Times New Roman", size: 13 },
         padding: 10
       }
     },
     scales: {
       y: {
-        grid: { color: "#1e324820" },
-        ticks: { color: "#7aa3c8", font: { family: "JetBrains Mono", size: 10 } },
-        title: { display: true, text: "Công Suất (kW)", color: "#7aa3c8", font: { size: 11 } }
+        grid: { color: "#e2e8f0" },
+        ticks: { color: "#334155", font: { family: "Times New Roman", size: 13, weight: "bold" } },
+        title: { display: true, text: "Công Suất (kW)", color: "#1e293b", font: { size: 13, family: "Times New Roman", weight: "bold" } }
       },
       x: {
         grid: { display: false },
-        ticks: { color: "#7aa3c8", font: { family: "JetBrains Mono", size: 10 } }
+        ticks: { color: "#334155", font: { family: "Times New Roman", size: 13, weight: "bold" } }
       }
     }
   };
@@ -320,9 +320,9 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* System Load Chart */}
         <div className="chart-wrap min-h-[300px] flex flex-col justify-between">
-          <div className="chart-title flex justify-between items-center pb-2 border-b border-[#1e3248]/30">
+          <div className="chart-title flex justify-between items-center pb-2 border-b border-slate-200">
             <span>⚡ Phân Bố Công Suất Trạm Biến Áp (P VS Q)</span>
-            <span className="text-[10px] font-mono text-[#00d4ff] bg-[#00d4ff]/10 px-2 py-0.5 rounded">MSB Realtime</span>
+            <span className="text-[11px] font-bold text-sky-800 bg-sky-50 px-2 py-0.5 rounded">MSB Realtime</span>
           </div>
           <div className="flex-1 relative min-h-[220px]">
             <Doughnut {...{ key: "dashboard-doughnut", data: doughnutData, options: doughnutOptions } as any} />
@@ -331,9 +331,9 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
 
         {/* Solar VS Load Profile */}
         <div className="chart-wrap min-h-[300px] flex flex-col justify-between">
-          <div className="chart-title flex justify-between items-center pb-2 border-b border-[#1e3248]/30">
+          <div className="chart-title flex justify-between items-center pb-2 border-b border-slate-200">
             <span>☀️ Chu Kỳ Sương Nắng 24H (Tải vs Solar Bám Tải)</span>
-            <span className="text-[10px] font-mono text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded">Zero-Export Capped</span>
+            <span className="text-[11px] font-bold text-amber-800 bg-amber-50 px-2 py-0.5 rounded">Zero-Export Capped</span>
           </div>
           <div className="flex-1 min-h-[220px] pt-4">
             <Line {...{ key: "dashboard-line", data: lineChartData, options: lineChartOptions } as any} />
@@ -365,35 +365,35 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
         {/* SCADA MONITOR ALERTS LIST */}
         <div className="card flex flex-col h-full justify-between">
           <div>
-            <div className="card-title pb-2 border-b border-[#1e3248]/30 mb-4 flex items-center gap-2">
-              <ShieldAlert className="w-4 h-4 text-rose-500" />
+            <div className="card-title pb-2 border-b border-slate-200 mb-4 flex items-center gap-2">
+              <ShieldAlert className="w-4 h-4 text-rose-600" />
               <span>Hệ Thống Cảnh Báo SCADA</span>
             </div>
 
             <div className="space-y-2 max-h-[260px] overflow-y-auto pr-1">
               {alerts.map((alt, idx) => {
                 const alertClasses = {
-                  green: "bg-[#00ff88]/5 border-[#00ff88]/20 text-[#00ff88]/90",
-                  amber: "bg-amber-400/5 border-amber-400/20 text-amber-400/90",
-                  red: "bg-rose-500/5 border-rose-500/20 text-rose-500/90",
-                  cyan: "bg-[#00d4ff]/5 border-[#00d4ff]/20 text-[#00d4ff]/90",
+                  green: "bg-emerald-50 border-emerald-200 text-emerald-800",
+                  amber: "bg-amber-50 border-amber-200 text-amber-800",
+                  red: "bg-rose-50 border-rose-200 text-rose-800",
+                  cyan: "bg-sky-50 border-sky-200 text-sky-800",
                 };
 
                 return (
                   <div 
                     key={idx} 
                     onClick={() => alt.actionTab && setActiveTab(alt.actionTab)}
-                    className={`alert flex gap-2 border p-3 rounded-md text-xs leading-relaxed group transition-all duration-200 ${alertClasses[alt.type]} ${alt.actionTab ? "cursor-pointer hover:border-slate-400" : ""}`}
+                    className={`alert flex gap-2 border p-3 rounded-md text-[13px] leading-relaxed group transition-all duration-200 ${alertClasses[alt.type]} ${alt.actionTab ? "cursor-pointer hover:border-slate-400 font-bold" : "font-bold"}`}
                   >
-                    {alt.type === "red" && <AlertTriangle className="w-4 h-4 text-rose-500 shrink-0 mt-0.5" />}
-                    {alt.type === "amber" && <AlertTriangle className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />}
-                    {alt.type === "green" && <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />}
-                    {alt.type === "cyan" && <Info className="w-4 h-4 text-cyan-450 shrink-0 mt-0.5" />}
+                    {alt.type === "red" && <AlertTriangle className="w-4 h-4 text-rose-600 shrink-0 mt-0.5" />}
+                    {alt.type === "amber" && <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />}
+                    {alt.type === "green" && <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />}
+                    {alt.type === "cyan" && <Info className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />}
                     
                     <div className="flex-1">
                       <p>{alt.text}</p>
                       {alt.actionTab && (
-                        <span className="text-[10px] font-mono underline block mt-1 opacity-60 group-hover:opacity-100">
+                        <span className="text-[11px] underline block mt-1 opacity-80 group-hover:opacity-100">
                           Nhấp để hiệu chỉnh trong Module
                         </span>
                       )}
@@ -404,7 +404,7 @@ export const DashboardPanel: React.FC<DashboardPanelProps> = ({
             </div>
           </div>
 
-          <div className="pt-3 border-t border-[#1e3248]/20 text-center text-[10px] text-slate-500 font-mono">
+          <div className="pt-3 border-t border-slate-200 text-center text-[12px] text-slate-600 font-bold">
             HỆ THỐNG GIÁM SÁT EPC TRẠM BIÊN ÁP VIỆT NAM · BẢM TẢI ONLINE
           </div>
         </div>
